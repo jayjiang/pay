@@ -1,10 +1,10 @@
 <?php 
 
 namespace jwfpay;
-require_once dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'alipay/wappay/service/AlipayTradeService.php';
-require_once dirname ( __FILE__ ).DIRECTORY_SEPARATOR.'alipay/wappay/buildermodel/AlipayTradeWapPayContentBuilder.php';
-use jwfpay\builder\alipay\WapBuilder;
-use jwfpay\builder\alipay\QueryBuilder;
+require_once './alipay/wappay/service/AlipayTradeService.php';
+require_once './alipay/wappay/buildermodel/AlipayTradeWapPayContentBuilder.php';
+require_once './alipay/wappay/service/AlipayTradeService.php';
+require_once './alipay/wappay/buildermodel/AlipayTradeQueryContentBuilder.php';
 
 class Alipay
 {
@@ -18,9 +18,7 @@ class Alipay
 	
 	public function wap($order)
 	{
-		//$wap = new WapBuilder($this->commonConfig);
-		//return $wap->buildParams($order);
-		 //超时时间
+     	//超时时间
 	    $timeout_express="1m";
 
 	    $payRequestBuilder = new AlipayTradeWapPayContentBuilder();
@@ -38,7 +36,20 @@ class Alipay
 
 	public function query($order)
 	{
-		$query = new QueryBuilder($this->commonConfig);
-		return $query->run($order);
+		$out_trade_no = trim($order['out_trade_no']??null);
+
+       //支付宝交易号，和商户订单号二选一
+	    $trade_no = trim($order['trade_no']??null);
+	    if(empty($out_trade_no) && empty($trade_no)){
+	    	new Exception();
+	    }
+
+	    $RequestBuilder = new AlipayTradeQueryContentBuilder();
+	    $RequestBuilder->setTradeNo($trade_no);
+	    $RequestBuilder->setOutTradeNo($out_trade_no);
+
+	    $Response = new AlipayTradeService($config);
+	    $result=$Response->Query($RequestBuilder);
+	    return ;
 	}
 }
