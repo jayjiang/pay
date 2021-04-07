@@ -1,0 +1,39 @@
+{
+    "name": "jayjiang/pay",
+    "description": " Alipay 和 WeChat 的支付扩展包",
+    "keywords": ["alipay", "wechat", "pay"],
+    "type": "library",
+    "support": {
+        "issues": "https://github.com/jayjiang/pay/issues",
+        "source": "https://github.com/jayjiang/pay"
+    },
+    "authors": [
+        {
+            "name": "jayjiang",
+            "email": "jwf0523@126.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.3",
+        "ext-openssl": "*",
+        "ext-simplexml":"*",
+        "ext-libxml": "*",
+        "ext-json": "*",
+        "ext-bcmath": "*",
+        
+    },
+    "require-dev": {
+       
+    },
+    "autoload": {
+        "psr-4": {
+            "jayjiang\\Pay\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "jayjiang\\Pay\\Tests\\": "tests"
+        }
+    },
+    "license": "MIT"
+}
