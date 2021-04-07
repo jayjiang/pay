@@ -19,7 +19,7 @@
         "ext-simplexml":"*",
         "ext-libxml": "*",
         "ext-json": "*",
-        "ext-bcmath": "*",
+        "ext-bcmath": "*"
         
     },
     "require-dev": {
